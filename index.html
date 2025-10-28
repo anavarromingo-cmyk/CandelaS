@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasapalabra Nu Skin - Formación de Comerciales</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">NU SKIN</div>
+            <nav class="nav">
+                <button id="btnInicio" class="nav-btn">Inicio</button>
+                <button id="btnInstrucciones" class="nav-btn">Instrucciones</button>
+                <span id="scoreDisplay" class="score-display hidden"></span>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- PANTALLA DE INICIO -->
+        <section id="pantallaInicio" class="screen active">
+            <div class="hero">
+                <h1 class="title-main">Pasapalabra Nu Skin</h1>
+                <h2 class="subtitle">Formación Profesional de Productos</h2>
+                <p class="tagline">Domina el conocimiento experto de Nu Skin</p>
+                
+                <div class="buttons-group">
+                    <button id="btnIniciarJuego" class="btn btn-primary btn-large">INICIAR JUEGO</button>
+                </div>
+
+                <div class="instructions-brief">
+                    <h3>¿Cómo jugar?</h3>
+                    <ul>
+                        <li>Elige un modo de juego</li>
+                        <li>Responde preguntas sobre productos y tecnología Nu Skin</li>
+                        <li>En el Rosco: escribe tu respuesta o pulsa PASAPALABRA para saltar</li>
+                        <li>¡Acumula puntos y conviértete en experto Nu Skin!</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SELECCIÓN DE MODO -->
+        <section id="pantallaSeleccion" class="screen">
+            <div class="mode-selection">
+                <h2 class="section-title">Selecciona tu modo de juego</h2>
+                <div class="modes-grid">
+                    <div class="mode-card" id="modoRosco">
+                        <div class="mode-icon">A</div>
+                        <h3>Rosco Alfabético</h3>
+                        <p>Preguntas de la A a la Z sobre productos, tecnología y ciencia Nu Skin</p>
+                        <button class="btn btn-primary">Jugar Rosco</button>
+                    </div>
+                    <div class="mode-card" id="modoQuiz">
+                        <div class="mode-icon">Q</div>
+                        <h3>Quiz Rápido</h3>
+                        <p>10 preguntas de opción múltiple para evaluar tus conocimientos</p>
+                        <button class="btn btn-primary">Jugar Quiz</button>
+                    </div>
+                    <div class="mode-card" id="modoEstudio">
+                        <div class="mode-icon">S</div>
+                        <h3>Modo Estudio</h3>
+                        <p>Revisa beneficios de productos sin presión de tiempo</p>
+                        <button class="btn btn-secondary">Estudiar</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PANTALLA DEL ROSCO -->
+        <section id="pantallaRosco" class="screen">
+            <div class="rosco-container">
+                <div class="rosco-header">
+                    <div class="timer-container">
+                        <div class="timer-label">Tiempo</div>
+                        <div id="timer" class="timer">3:00</div>
+                    </div>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Aciertos:</span>
+                            <span id="aciertos" class="stat-value">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Fallos:</span>
+                            <span id="fallos" class="stat-value">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Puntos:</span>
+                            <span id="puntos" class="stat-value">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rosco-main">
+                    <!-- Círculo del Rosco -->
+                    <div id="roscoCirculo" class="rosco-circulo"></div>
+
+                    <!-- Área de pregunta -->
+                    <div class="pregunta-area">
+                        <div class="letra-actual-container">
+                            <span class="letra-actual-label">LETRA</span>
+                            <span id="letraActual" class="letra-actual">A</span>
+                        </div>
+                        <div id="categoriaActual" class="categoria">Tecnología</div>
+                        <div id="preguntaTexto" class="pregunta-texto"></div>
+                        
+                        <div class="respuesta-container">
+                            <input type="text" id="inputRespuesta" class="input-respuesta" placeholder="Escribe tu respuesta..." autocomplete="off">
+                            <div class="botones-respuesta">
+                                <button id="btnEnviarRespuesta" class="btn btn-primary">ENVIAR</button>
+                                <button id="btnPasapalabra" class="btn btn-warning">PASAPALABRA</button>
+                            </div>
+                            <button id="btnMostrarPista" class="btn-pista">Ver pista</button>
+                            <div id="pistaTexto" class="pista-texto hidden"></div>
+                        </div>
+
+                        <div id="feedbackRespuesta" class="feedback-respuesta hidden"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PANTALLA QUIZ -->
+        <section id="pantallaQuiz" class="screen">
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <div id="quizProgreso" class="quiz-progreso">Pregunta 1 de 10</div>
+                    <div class="quiz-puntos">Puntos: <span id="quizPuntos">0</span></div>
+                </div>
+
+                <div class="quiz-content">
+                    <div id="quizPregunta" class="quiz-pregunta"></div>
+                    <div id="quizOpciones" class="quiz-opciones"></div>
+                    <div id="quizExplicacion" class="quiz-explicacion hidden"></div>
+                    <button id="btnSiguienteQuiz" class="btn btn-primary btn-large hidden">SIGUIENTE</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PANTALLA ESTUDIO -->
+        <section id="pantallaEstudio" class="screen">
+            <div class="estudio-container">
+                <h2 class="section-title">Productos Nu Skin - Modo Estudio</h2>
+                <div class="productos-grid" id="productosGrid"></div>
+                
+                <div id="productoDetalle" class="producto-detalle hidden">
+                    <button id="btnVolverProductos" class="btn btn-secondary">← Volver a productos</button>
+                    <h3 id="productoNombre" class="producto-nombre"></h3>
+                    <div class="producto-info">
+                        <div class="info-section">
+                            <h4>Beneficios Clave</h4>
+                            <ul id="productoBeneficios" class="beneficios-list"></ul>
+                        </div>
+                        <div class="info-section">
+                            <h4>Para quién está indicado</h4>
+                            <p id="productoParaQuien"></p>
+                        </div>
+                        <div class="info-section">
+                            <h4>Datos Clave</h4>
+                            <p id="productoDatos"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PANTALLA RESULTADOS -->
+        <section id="pantallaResultados" class="screen">
+            <div class="resultados-container">
+                <h2 class="section-title">¡Juego Completado!</h2>
+                
+                <div class="resultados-content">
+                    <div class="puntuacion-final">
+                        <div class="puntuacion-numero" id="puntuacionFinal">0</div>
+                        <div class="puntuacion-label">PUNTOS TOTALES</div>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number" id="correctasFinales">0</div>
+                            <div class="stat-label">Respuestas Correctas</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="porcentajeAcierto">0%</div>
+                            <div class="stat-label">Porcentaje de Acierto</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="tiempoEmpleado">0:00</div>
+                            <div class="stat-label">Tiempo Empleado</div>
+                        </div>
+                    </div>
+
+                    <div id="mensajeMotivacional" class="mensaje-motivacional"></div>
+
+                    <div id="desgloseCategorias" class="desglose-categorias"></div>
+
+                    <div class="botones-finales">
+                        <button id="btnJugarNuevo" class="btn btn-primary btn-large">JUGAR DE NUEVO</button>
+                        <button id="btnVerIncorrectas" class="btn btn-secondary">VER RESPUESTAS INCORRECTAS</button>
+                        <button id="btnIrEstudio" class="btn btn-secondary">MODO ESTUDIO</button>
+                    </div>
+
+                    <div id="respuestasIncorrectas" class="respuestas-incorrectas hidden"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal de Instrucciones -->
+        <div id="modalInstrucciones" class="modal hidden">
+            <div class="modal-content">
+                <button class="modal-close" id="btnCerrarModal">&times;</button>
+                <h2>Instrucciones del Juego</h2>
+                <div class="instrucciones-detalladas">
+                    <h3>Rosco Alfabético</h3>
+                    <p>Responde preguntas de la A a la Z sobre Nu Skin. Tienes 3 minutos para completar el rosco.</p>
+                    <ul>
+                        <li>Escribe tu respuesta y pulsa ENVIAR</li>
+                        <li>Pulsa PASAPALABRA para saltar temporalmente</li>
+                        <li>100 puntos por respuesta correcta, -20 por incorrecta</li>
+                        <li>Bonus de +500 puntos si completas sin usar pasapalabra</li>
+                        <li>Bonus de tiempo: &lt;2min: +300pts, 2-2.5min: +200pts</li>
+                    </ul>
+
+                    <h3>Quiz Rápido</h3>
+                    <p>10 preguntas de opción múltiple con feedback inmediato.</p>
+                    <ul>
+                        <li>Selecciona una de las 4 opciones</li>
+                        <li>Lee la explicación detallada tras responder</li>
+                        <li>100 puntos por respuesta correcta</li>
+                    </ul>
+
+                    <h3>Modo Estudio</h3>
+                    <p>Revisa productos y sus beneficios sin presión de tiempo. Perfecto para prepararte antes de jugar.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>Formación Nu Skin · Herramienta Profesional de Entrenamiento</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
